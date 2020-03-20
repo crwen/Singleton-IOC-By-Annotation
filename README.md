@@ -1,3 +1,19 @@
+If you want to test my demo, you should download both the smart and demo project,because the demo depends on smart
+
+```xml
+        <dependency>
+            <groupId>me.crw.smart</groupId>
+            <artifactId>smart</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+```
+
+
+
+Notice the demo structure
+
+![img](./asset/structure.png)
+
 
 
 create  a properties named `smart.properties`
