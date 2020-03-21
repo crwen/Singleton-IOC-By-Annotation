@@ -1,3 +1,5 @@
+If you want to learn more about this project, visit this [blog](http://blog.crwenassert.me/archives/1584803446360)
+
 If you want to test my demo, you should download both the smart and demo project,because the demo depends on smart
 
 ```xml
