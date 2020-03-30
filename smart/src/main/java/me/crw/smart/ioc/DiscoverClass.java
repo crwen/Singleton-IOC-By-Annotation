@@ -1,5 +1,6 @@
 package me.crw.smart.ioc;
 
+import me.crw.smart.annotated.Configuration;
 import me.crw.smart.config.Config;
 import me.crw.smart.annotated.Controller;
 import me.crw.smart.annotated.Service;
@@ -47,7 +48,7 @@ public class DiscoverClass {
 
 
 			if (cls.isAnnotationPresent(Controller.class) ||
-					cls.isAnnotationPresent(Service.class)) {
+					cls.isAnnotationPresent(Service.class) || cls.isAnnotationPresent(Configuration.class)) {
 				mybeanClass = true;
 			}
 			try {

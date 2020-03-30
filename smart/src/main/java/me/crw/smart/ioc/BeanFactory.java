@@ -1,13 +1,14 @@
 package me.crw.smart.ioc;
 
+import me.crw.smart.annotated.Bean;
+import me.crw.smart.annotated.Configuration;
 import me.crw.smart.annotated.Inject;
 import me.crw.smart.utils.ArrayUtils;
 import me.crw.smart.utils.ReflectionUtils;
 
 import java.lang.reflect.Field;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.Method;
+import java.util.*;
 
 /**
  * ClassName: BeanFactory
@@ -79,9 +80,29 @@ public class BeanFactory {
 			if (!BEAN_MAP.containsKey(cls)) {
 				Object bean = createBean(cls);
 				BEAN_MAP.put(cls, bean);
+				if (cls.isAnnotationPresent(Configuration.class)) {
+					configBean(cls);
+				}
 			}
 		}
+	}
 
+	private static void configBean(Class<?> cls) {
+		Set<Class<?>> configBean = new HashSet<>();
+		Object obj = ReflectionUtils.newInstance(cls);
+		Method[] declaredMethods = cls.getDeclaredMethods();
+		for (Method method : declaredMethods) {
+			if (method.isAnnotationPresent(Bean.class)) {
+				Object result = ReflectionUtils.invokeMethod(obj, method);
+				BEAN_MAP.put(method.getReturnType(), result);
+			}
+		}
+	}
+
+
+	public static void add(Class<?> clazz) {
+		Object bean = createBean(clazz);
+		BEAN_MAP.put(clazz, bean);
 	}
 
 	/**

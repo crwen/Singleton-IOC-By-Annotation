@@ -23,7 +23,6 @@ public class ApplicationContext {
 		this.startClass = startClass;
 
 		Config.setPath(ConfigHelper.getBasePackage());
-		System.out.println(Config.getPath());
 		init();
 		Map<Class<?>, Object> beanMap = BeanFactory.getBeanMap();
 	}

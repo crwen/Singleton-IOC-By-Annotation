@@ -4,6 +4,7 @@ import me.crw.smart.ApplicationContext;
 import me.crw.smart.annotated.Controller;
 import me.crw.smart.annotated.Inject;
 import me.demo.service.PersonService;
+import redis.clients.jedis.Jedis;
 
 /**
  * ClassName: Main
@@ -20,8 +21,21 @@ public class Main {
     private static PersonService personService;
 
 
+    @Inject
+    private static Jedis jedis;
+
     public static void main(String[] args) {
         ApplicationContext context = new ApplicationContext(Main.class);
         personService.find();
+        System.out.println(jedis);
+        System.out.println(jedis.ping());
+        jedis.set("k1", "v1");
+        jedis.set("k2", "v2");
+        jedis.set("k3", "v3");
+        System.out.println(jedis.get("k1"));
+        System.out.println(jedis.get("k2"));
+        System.out.println(jedis.get("k3"));
+
+
     }
 }
